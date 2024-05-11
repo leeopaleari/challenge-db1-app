@@ -33,8 +33,8 @@ import br.com.fiap.mentora.ui.theme.PrimaryColor
 
 @Composable
 fun SignInScreen(
-    modifier: Modifier = Modifier,
-    onNavigateToSignUpScreen: () -> Unit
+    onNavigateToSignUpScreen: () -> Unit,
+    onNavigateToAppScaffold: () -> Unit,
 ) {
     Scaffold(
         containerColor = BackgroundDark
@@ -103,7 +103,7 @@ fun SignInScreen(
 
                 Spacer(modifier = Modifier.weight(1f))
 
-                BaseButton(text = "Entrar", onClick = {}, modifier = Modifier.fillMaxWidth(0.7f))
+                BaseButton(text = "Entrar", onClick = { onNavigateToAppScaffold() }, modifier = Modifier.fillMaxWidth(0.7f))
 
                 Spacer(modifier = Modifier.height(20.dp))
 

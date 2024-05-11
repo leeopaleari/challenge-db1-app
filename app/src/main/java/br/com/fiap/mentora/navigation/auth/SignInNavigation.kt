@@ -6,11 +6,12 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import br.com.fiap.mentora.ui.screens.auth.signIn.SignInScreen
 
-const val signInRoute = "signInRoute"
+const val signInRoute = "signin_route"
 
 
 fun NavGraphBuilder.signInScreen(
     onNavigateToSignUpScreen: () -> Unit,
+    onNavigateToAppScaffold: () -> Unit,
 ) {
     composable(signInRoute,
         enterTransition = {
@@ -26,7 +27,8 @@ fun NavGraphBuilder.signInScreen(
             )
         }) {
         SignInScreen(
-            onNavigateToSignUpScreen = onNavigateToSignUpScreen
+            onNavigateToSignUpScreen = onNavigateToSignUpScreen,
+            onNavigateToAppScaffold = onNavigateToAppScaffold
         )
     }
 }
