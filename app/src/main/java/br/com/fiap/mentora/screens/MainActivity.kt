@@ -10,6 +10,7 @@ import br.com.fiap.mentora.navigation.auth.authGraph
 import br.com.fiap.mentora.navigation.profile.navigateToProfileScreen
 import br.com.fiap.mentora.navigation.auth.navigateToSignUpScreen
 import br.com.fiap.mentora.navigation.profile.navigateYourHabilitiesScreen
+import br.com.fiap.mentora.navigation.profile.profileRegisterGraph
 import br.com.fiap.mentora.ui.theme.MentoraTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,6 +35,12 @@ class MainActivity : ComponentActivity() {
                         },
                         onNavigateToProfileScreen = {
                             navController.navigateToProfileScreen()
+                        }
+                    )
+
+                    profileRegisterGraph(
+                        onPopBackStack = {
+                            navController.popBackStack()
                         },
                         onNavigateToYourHabilitiesScreen = {
                             navController.navigateYourHabilitiesScreen()

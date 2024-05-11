@@ -1,10 +1,10 @@
 package br.com.fiap.mentora.screens.auth.signUp
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -36,72 +36,67 @@ fun SignUpScreen(
     Scaffold(
         containerColor = BackgroundDark
     ) { innerPadding ->
-        Box(
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
+                .fillMaxSize()
                 .padding(innerPadding)
                 .padding(16.dp)
                 .verticalScroll(scrollState)
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
+            Image(
+                painter = painterResource(id = R.drawable.signup_robo),
+                contentDescription = "Imagem de um robô cartoonizado com um livro na mão",
                 modifier = Modifier
-                    .fillMaxWidth()
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.signup_robo),
-                    contentDescription = "Imagem de um robô cartoonizado com um livro na mão",
-                    modifier = Modifier
-                        .size(180.dp, Dp.Unspecified)
-                        .aspectRatio(1f)
-                )
+                    .size(180.dp, Dp.Unspecified)
+                    .aspectRatio(1f)
+            )
 
-                Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
-                TitleText(text = "Criar Conta")
+            TitleText(text = "Criar Conta")
 
-                Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
-                BaseInputField(
-                    onValueChange = {},
-                    label = "Nome completo",
-                    placeholder = "Digite seu nome completo"
-                )
+            BaseInputField(
+                onValueChange = {},
+                label = "Nome completo",
+                placeholder = "Digite seu nome completo"
+            )
 
-                Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
 
-                BaseInputField(
-                    onValueChange = {},
-                    label = "E-mail",
-                    placeholder = "exemplo@email.com"
-                )
+            BaseInputField(
+                onValueChange = {},
+                label = "E-mail",
+                placeholder = "exemplo@email.com"
+            )
 
-                Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
-                BaseInputField(
-                    onValueChange = {},
-                    label = "Telefone",
-                    placeholder = "(  ) _____-____"
-                )
+            BaseInputField(
+                onValueChange = {},
+                label = "Telefone",
+                placeholder = "(  ) _____-____"
+            )
 
-                Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
-                BaseInputField(
-                    onValueChange = {},
-                    label = "Senha",
-                    placeholder = "Digite sua senha"
-                )
+            BaseInputField(
+                onValueChange = {},
+                label = "Senha",
+                placeholder = "Digite sua senha"
+            )
 
-                Spacer(modifier = Modifier.height(40.dp))
+            Spacer(modifier = Modifier.weight(1f))
 
-                BaseButton(text = "Cadastrar", onClick = {
-                                                         onNavigateToProfileScreen()
-                }, modifier = Modifier.fillMaxWidth(0.7f))
-                BaseButton(text = "Voltar", onClick = onPopBackStack, buttonType = ButtonType.OUTLINED)
+            BaseButton(text = "Cadastrar", onClick = {
+                onNavigateToProfileScreen()
+            }, modifier = Modifier.fillMaxWidth(0.7f))
+            BaseButton(text = "Voltar", onClick = onPopBackStack, buttonType = ButtonType.OUTLINED)
 
-                Spacer(modifier = Modifier.height(40.dp))
-            }
-
+            Spacer(modifier = Modifier.height(10.dp))
         }
     }
 }

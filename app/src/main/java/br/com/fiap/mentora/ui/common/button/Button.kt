@@ -1,5 +1,6 @@
 package br.com.fiap.mentora.ui.common.button
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -27,13 +28,11 @@ fun BaseButton(
     buttonType: ButtonType = ButtonType.SOLID
 ) {
     Button(
-        modifier = modifier
-//            .padding(top = 10.dp, bottom = 10.dp)
-        ,
+        modifier = modifier        ,
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = if (buttonType == ButtonType.OUTLINED) BackgroundDark
-                                else PrimaryColor,
+            else PrimaryColor
         )
     ) {
         Text(

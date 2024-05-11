@@ -19,17 +19,24 @@ fun NavHostController.navigateYourHabilitiesScreen() {
 
 
 fun NavGraphBuilder.profileRegisterScreen(
-    navigateToYourHabilitiesScreen: () -> Unit
+    navigateToYourHabilitiesScreen: () -> Unit,
+    onPopBackStack: () -> Unit,
+
 ) {
     composable(profileRegisterRoute) {
         ProfileRegisterScreen(
+            onPopBackStack = onPopBackStack,
             navigateToYourHabilitiesScreen = navigateToYourHabilitiesScreen
         )
     }
 }
 
-fun NavGraphBuilder.yourHabilitiesScreen() {
+fun NavGraphBuilder.yourHabilitiesScreen(
+    onPopBackStack: () -> Unit
+) {
     composable(yourHabilitiesRoute) {
-        YourHabilitiesScreen()
+        YourHabilitiesScreen(
+            onPopBackStack = onPopBackStack
+        )
     }
 }

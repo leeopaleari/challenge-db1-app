@@ -49,6 +49,8 @@ fun SignInScreen(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
+                Spacer(modifier = Modifier.height(40.dp))
+
                 Image(
                     painter = painterResource(id = R.drawable.signin_robo),
                     contentDescription = "Imagem de um robô cartoonizado com um livro na mão",
@@ -99,11 +101,12 @@ fun SignInScreen(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(40.dp))
+                Spacer(modifier = Modifier.weight(1f))
 
                 BaseButton(text = "Entrar", onClick = {}, modifier = Modifier.fillMaxWidth(0.7f))
 
-                Spacer(modifier = Modifier.height(40.dp))
+                Spacer(modifier = Modifier.height(20.dp))
+
 
                 Row() {
                     Text(text = "Não é cadastrado? ", fontSize = 14.sp)
@@ -117,6 +120,9 @@ fun SignInScreen(
                         fontFamily = MontserratSemiBold
                     )
                 }
+
+                Spacer(modifier = Modifier.height(40.dp))
+
             }
         }
     }
