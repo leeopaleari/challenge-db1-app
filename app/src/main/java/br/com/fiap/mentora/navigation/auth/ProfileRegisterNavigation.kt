@@ -1,14 +1,13 @@
-package br.com.fiap.mentora.navigation.profile
+package br.com.fiap.mentora.navigation.auth
 
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.tween
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import br.com.fiap.mentora.navigation.auth.signUpRoute
 import br.com.fiap.mentora.ui.screens.auth.profile.ProfileRegisterScreen
 
-const val profileRegisterRoute = "profileRegisterRoute"
+const val profileRegisterRoute = "profile_register_route"
 
 fun NavHostController.navigateToProfileScreen() {
     navigate(profileRegisterRoute)
@@ -19,7 +18,8 @@ fun NavGraphBuilder.profileRegisterScreen(
     onPopBackStack: () -> Unit,
 
     ) {
-    composable(profileRegisterRoute,
+    composable(
+        profileRegisterRoute,
         enterTransition = {
             when (initialState.destination.route) {
                 signUpRoute -> slideIntoContainer(

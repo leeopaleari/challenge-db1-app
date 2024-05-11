@@ -5,10 +5,9 @@ import androidx.compose.animation.core.tween
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import br.com.fiap.mentora.navigation.profile.profileRegisterRoute
 import br.com.fiap.mentora.ui.screens.auth.signUp.SignUpScreen
 
-const val signUpRoute = "signUpRoute"
+const val signUpRoute = "signup_route"
 
 fun NavHostController.navigateToSignUpScreen() {
     navigate(signUpRoute)

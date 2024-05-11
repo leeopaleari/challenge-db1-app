@@ -1,4 +1,4 @@
-package br.com.fiap.mentora.navigation.profile
+package br.com.fiap.mentora.navigation.auth
 
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.tween
@@ -7,7 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import br.com.fiap.mentora.ui.screens.auth.profile.YourHabilitiesScreen
 
-const val yourHabilitiesRoute = "yourHabilitiesRoute"
+const val yourHabilitiesRoute = "your_habilities_route"
 
 fun NavHostController.navigateYourHabilitiesScreen() {
     navigate(yourHabilitiesRoute)
@@ -16,7 +16,8 @@ fun NavHostController.navigateYourHabilitiesScreen() {
 fun NavGraphBuilder.yourHabilitiesScreen(
     onPopBackStack: () -> Unit
 ) {
-    composable(yourHabilitiesRoute,
+    composable(
+        yourHabilitiesRoute,
         enterTransition = {
             when (initialState.destination.route) {
                 profileRegisterRoute -> slideIntoContainer(
