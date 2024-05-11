@@ -7,8 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.mentora.navigation.auth.authGraph
-import br.com.fiap.mentora.navigation.profile.navigateToProfileScreen
 import br.com.fiap.mentora.navigation.auth.navigateToSignUpScreen
+import br.com.fiap.mentora.navigation.profile.navigateToProfileScreen
 import br.com.fiap.mentora.navigation.profile.navigateYourHabilitiesScreen
 import br.com.fiap.mentora.navigation.profile.profileRegisterGraph
 import br.com.fiap.mentora.ui.theme.MentoraTheme
