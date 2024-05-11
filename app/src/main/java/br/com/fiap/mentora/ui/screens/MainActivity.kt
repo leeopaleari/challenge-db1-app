@@ -1,4 +1,4 @@
-package br.com.fiap.mentora.screens
+package br.com.fiap.mentora.ui.screens
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

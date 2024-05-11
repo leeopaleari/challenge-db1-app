@@ -3,7 +3,7 @@ package br.com.fiap.mentora.navigation.auth
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import br.com.fiap.mentora.screens.auth.signUp.SignUpScreen
+import br.com.fiap.mentora.ui.screens.auth.signUp.SignUpScreen
 
 const val signUpRoute = "signUpRoute"
 

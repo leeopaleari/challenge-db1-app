@@ -1,4 +1,4 @@
-package br.com.fiap.mentora.screens.auth.profile
+package br.com.fiap.mentora.ui.screens.auth.profile
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -36,7 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.fiap.mentora.screens.auth.profile.components.SkillSlider
+import br.com.fiap.mentora.ui.screens.auth.profile.components.SkillSlider
 import br.com.fiap.mentora.ui.common.button.BaseButton
 import br.com.fiap.mentora.ui.common.button.ButtonType
 import br.com.fiap.mentora.ui.theme.BackgroundDark

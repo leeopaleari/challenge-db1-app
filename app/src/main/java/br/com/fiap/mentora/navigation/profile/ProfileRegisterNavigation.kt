@@ -3,8 +3,8 @@ package br.com.fiap.mentora.navigation.profile
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import br.com.fiap.mentora.screens.auth.profile.ProfileRegisterScreen
-import br.com.fiap.mentora.screens.auth.profile.YourHabilitiesScreen
+import br.com.fiap.mentora.ui.screens.auth.profile.ProfileRegisterScreen
+import br.com.fiap.mentora.ui.screens.auth.profile.YourHabilitiesScreen
 
 const val profileRegisterRoute = "profileRegisterRoute"
 const val yourHabilitiesRoute = "yourHabilitiesRoute"

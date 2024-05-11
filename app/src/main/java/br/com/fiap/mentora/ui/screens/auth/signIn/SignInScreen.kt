@@ -1,4 +1,4 @@
-package br.com.fiap.mentora.screens.auth.signIn
+package br.com.fiap.mentora.ui.screens.auth.signIn
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
