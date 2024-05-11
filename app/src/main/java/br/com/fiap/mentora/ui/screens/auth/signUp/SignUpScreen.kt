@@ -1,7 +1,9 @@
 package br.com.fiap.mentora.ui.screens.auth.signUp
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
@@ -91,10 +94,22 @@ fun SignUpScreen(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            BaseButton(text = "Cadastrar", onClick = {
-                onNavigateToProfileScreen()
-            }, modifier = Modifier.fillMaxWidth(0.7f))
-            BaseButton(text = "Voltar", onClick = onPopBackStack, buttonType = ButtonType.OUTLINED)
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                BaseButton(
+                    text = "Voltar",
+                    onClick = onPopBackStack,
+                    modifier = Modifier.weight(0.5f),
+                    buttonType = ButtonType.OUTLINED
+                )
+                Spacer(modifier = Modifier.width(16.dp))
+                BaseButton(
+                    text = "Próximo",
+                    onClick = onNavigateToProfileScreen,
+                    modifier = Modifier.weight(0.5f)
+                )
+            }
 
             Spacer(modifier = Modifier.height(10.dp))
         }
