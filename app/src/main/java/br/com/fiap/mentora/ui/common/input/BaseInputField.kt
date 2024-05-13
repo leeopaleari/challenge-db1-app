@@ -1,6 +1,7 @@
 package br.com.fiap.mentora.ui.common.input
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -22,6 +23,8 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -33,7 +36,9 @@ fun BaseInputField(
     label: String,
     placeholder: String = "",
     textArea: Boolean = false,
-    autoFocus: Boolean = false
+    autoFocus: Boolean = false,
+    trailingIcon: @Composable() (() -> Unit)? = null,
+    leadingIcon: @Composable() (() -> Unit)? = null,
 ) {
 
     val focusManager = LocalFocusManager.current
@@ -59,8 +64,8 @@ fun BaseInputField(
         modifier = modifier
             .fillMaxWidth()
             .focusRequester(focusRequester),
-        label = { Text(text = label) },
-        placeholder = { Text(text = placeholder) },
+        label = { Text(text = label, fontSize = 14.sp) },
+        placeholder = { Text(text = placeholder, fontSize = 12.sp) },
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         singleLine = !textArea,
         colors = OutlinedTextFieldDefaults.colors(
@@ -70,6 +75,9 @@ fun BaseInputField(
             focusedBorderColor = Color(0xFF2BFDBE),
         ),
         minLines = if (textArea) 6 else 1,
-        visualTransformation = if (keyboardType == KeyboardType.Password) PasswordVisualTransformation() else VisualTransformation.None
+        visualTransformation = if (keyboardType == KeyboardType.Password) PasswordVisualTransformation() else VisualTransformation.None,
+        trailingIcon = trailingIcon,
+        leadingIcon = leadingIcon,
+        shape = RoundedCornerShape(8.dp)
     )
 }

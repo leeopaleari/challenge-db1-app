@@ -1,6 +1,7 @@
 package br.com.fiap.mentora.ui.screens.app
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -78,6 +79,7 @@ fun AppScaffold(
             NavigationBar(
                 containerColor = BackgroundDark,
                 tonalElevation = 2.dp,
+                modifier = Modifier.height(100.dp)
             ) {
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentDestination = navBackStackEntry?.destination

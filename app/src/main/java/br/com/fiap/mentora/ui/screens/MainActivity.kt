@@ -43,6 +43,5 @@ fun MentoraApp() {
                 AppScaffold(navController = navBarNavController)
             }
         )
-
     }
 }

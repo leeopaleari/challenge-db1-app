@@ -26,6 +26,5 @@ fun NavGraphBuilder.mainGraph(
         composable("profile_screen") {
             ProfileScreen()
         }
-
     }
 }

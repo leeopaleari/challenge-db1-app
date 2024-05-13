@@ -1,14 +1,10 @@
 package br.com.fiap.mentora.ui.common.button
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import br.com.fiap.mentora.ui.theme.BackgroundDark
 import br.com.fiap.mentora.ui.theme.MontserratBold
 import br.com.fiap.mentora.ui.theme.PrimaryColor

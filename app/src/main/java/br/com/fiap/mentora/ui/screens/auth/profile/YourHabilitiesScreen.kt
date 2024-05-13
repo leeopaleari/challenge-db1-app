@@ -1,8 +1,6 @@
 package br.com.fiap.mentora.ui.screens.auth.profile
 
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,17 +8,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Done
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.InputChip
 import androidx.compose.material3.InputChipDefaults
 import androidx.compose.material3.MaterialTheme
@@ -36,9 +27,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.fiap.mentora.ui.screens.auth.profile.components.SkillSlider
 import br.com.fiap.mentora.ui.common.button.BaseButton
 import br.com.fiap.mentora.ui.common.button.ButtonType
+import br.com.fiap.mentora.ui.common.chip.HabilityCard
+import br.com.fiap.mentora.ui.screens.auth.profile.components.SkillSlider
 import br.com.fiap.mentora.ui.theme.BackgroundDark
 import br.com.fiap.mentora.ui.theme.MontserratSemiBold
 import br.com.fiap.mentora.ui.theme.PrimaryColor
@@ -149,36 +141,7 @@ private fun HabilityRow(skill: String) {
     }
 }
 
-@Composable
-private fun HabilityCard(text: String, modifier: Modifier) {
-    Box(modifier = modifier) {
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = Color(0xFF2BDEFD)
-            ),
-            shape = RoundedCornerShape(20.dp)
-        ) {
-            Row(
-                modifier = Modifier.padding(vertical = 8.dp, horizontal = 10.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Icon(
-                    modifier = Modifier.size(16.dp),
-                    imageVector = Icons.Filled.Done,
-                    contentDescription = "Localized description"
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = text,
-                    color = TextContrast,
-                    fontFamily = MontserratSemiBold,
-                    fontSize = 14.sp
-                )
-            }
-        }
-    }
-}
+
 
 @Composable
 private fun RadioButtonGroup(
