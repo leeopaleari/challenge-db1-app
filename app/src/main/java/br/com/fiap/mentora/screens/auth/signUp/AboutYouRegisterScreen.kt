@@ -1,4 +1,4 @@
-package br.com.fiap.mentora.screens.auth.profile
+package br.com.fiap.mentora.screens.auth.signUp
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -30,7 +30,7 @@ import br.com.fiap.mentora.ui.theme.TextColorPrimary
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
-fun ProfileRegisterScreen(
+fun AboutYouRegisterScreen(
     modifier: Modifier = Modifier,
     navigateToYourHabilitiesScreen: () -> Unit,
     onPopBackStack: () -> Unit

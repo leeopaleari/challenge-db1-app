@@ -1,4 +1,4 @@
-package br.com.fiap.mentora.screens.auth.profile
+package br.com.fiap.mentora.screens.auth.signUp
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.sp
 import br.com.fiap.mentora.common.button.BaseButton
 import br.com.fiap.mentora.common.button.ButtonType
 import br.com.fiap.mentora.common.chip.HabilityCard
-import br.com.fiap.mentora.screens.auth.profile.components.SkillSlider
+import br.com.fiap.mentora.screens.auth.signUp.components.SkillSlider
 import br.com.fiap.mentora.ui.theme.BackgroundDark
 import br.com.fiap.mentora.ui.theme.MontserratSemiBold
 import br.com.fiap.mentora.ui.theme.PrimaryColor

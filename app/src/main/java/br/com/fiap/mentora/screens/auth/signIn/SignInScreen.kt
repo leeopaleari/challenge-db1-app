@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -36,94 +37,90 @@ fun SignInScreen(
     onNavigateToSignUpScreen: () -> Unit,
     onNavigateToAppScaffold: () -> Unit,
 ) {
-    Scaffold(
-        containerColor = BackgroundDark
-    ) { innerPadding ->
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(40.dp))
+
+        Image(
+            painter = painterResource(id = R.drawable.signin_robo),
+            contentDescription = "Imagem de um robô cartoonizado com um livro na mão",
+            modifier = Modifier
+                .size(180.dp, Dp.Unspecified)
+                .aspectRatio(1f)
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        TitleText(text = "Login")
+
+        Spacer(modifier = Modifier.height(80.dp))
+
+        BaseInputField(
+            onValueChange = {},
+            label = "E-mail",
+            placeholder = "Digite seu e-mail"
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        BaseInputField(
+            onValueChange = {},
+            keyboardType = KeyboardType.Password,
+            label = "Senha",
+            placeholder = "Digite sua senha"
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
         Box(
             modifier = Modifier
-                .padding(innerPadding)
-                .padding(16.dp)
+                .fillMaxWidth(),
+            contentAlignment = Alignment.CenterEnd
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
+            Text(
                 modifier = Modifier
-                    .fillMaxWidth()
-            ) {
-                Spacer(modifier = Modifier.height(40.dp))
+                    .clickable {
 
-                Image(
-                    painter = painterResource(id = R.drawable.signin_robo),
-                    contentDescription = "Imagem de um robô cartoonizado com um livro na mão",
-                    modifier = Modifier
-                        .size(180.dp, Dp.Unspecified)
-                        .aspectRatio(1f)
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                TitleText(text = "Login")
-
-                Spacer(modifier = Modifier.height(80.dp))
-
-                BaseInputField(
-                    onValueChange = {},
-                    label = "E-mail",
-                    placeholder = "Digite seu e-mail"
-                )
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                BaseInputField(
-                    onValueChange = {},
-                    keyboardType = KeyboardType.Password,
-                    label = "Senha",
-                    placeholder = "Digite sua senha"
-                )
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    contentAlignment = Alignment.CenterEnd
-                ) {
-                    Text(
-                        modifier = Modifier
-                            .clickable {
-
-                            },
-                        textDecoration = TextDecoration.Underline,
-                        text = "Esqueceu sua senha?",
-                        fontSize = 14.sp,
-                        color = PrimaryColor,
-                        fontFamily = MontserratSemiBold,
-                        textAlign = TextAlign.End
-                    )
-                }
-
-                Spacer(modifier = Modifier.weight(1f))
-
-                BaseButton(text = "Entrar", onClick = { onNavigateToAppScaffold() }, modifier = Modifier.fillMaxWidth(0.7f))
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-
-                Row() {
-                    Text(text = "Não é cadastrado? ", fontSize = 14.sp)
-                    Text(
-                        modifier = Modifier.clickable {
-                            onNavigateToSignUpScreen()
-                        },
-                        text = "Criar uma conta",
-                        fontSize = 14.sp,
-                        color = PrimaryColor,
-                        fontFamily = MontserratSemiBold
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(40.dp))
-
-            }
+                    },
+                textDecoration = TextDecoration.Underline,
+                text = "Esqueceu sua senha?",
+                fontSize = 14.sp,
+                color = PrimaryColor,
+                fontFamily = MontserratSemiBold,
+                textAlign = TextAlign.End
+            )
         }
+
+        Spacer(modifier = Modifier.weight(1f))
+
+        BaseButton(
+            text = "Entrar",
+            onClick = { onNavigateToAppScaffold() },
+            modifier = Modifier.fillMaxWidth(0.7f)
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+
+        Row() {
+            Text(text = "Não é cadastrado? ", fontSize = 14.sp)
+            Text(
+                modifier = Modifier.clickable {
+                    onNavigateToSignUpScreen()
+                },
+                text = "Criar uma conta",
+                fontSize = 14.sp,
+                color = PrimaryColor,
+                fontFamily = MontserratSemiBold
+            )
+        }
+
+        Spacer(modifier = Modifier.height(40.dp))
+
     }
+
 }

@@ -15,7 +15,6 @@ import br.com.fiap.mentora.screens.app.home.components.MatchCard
 
 @Composable
 fun HomeScreen(
-    onLogout: () -> Unit
 
 ) {
     Column(
@@ -24,9 +23,5 @@ fun HomeScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         MatchCard()
-
-        Button(onClick = { onLogout() }) {
-
-        }
     }
 }

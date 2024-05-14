@@ -40,7 +40,8 @@ fun HabilityCard(text: String, modifier: Modifier = Modifier) {
                 Icon(
                     modifier = Modifier.size(14.dp),
                     imageVector = Icons.Filled.Done,
-                    contentDescription = "Localized description"
+                    contentDescription = "Localized description",
+                    tint = Color.Black
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(

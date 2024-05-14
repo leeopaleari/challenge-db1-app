@@ -1,4 +1,4 @@
-package br.com.fiap.mentora.screens.auth.profile.components
+package br.com.fiap.mentora.screens.auth.signUp.components
 
 import android.util.Log
 import androidx.compose.foundation.layout.Column

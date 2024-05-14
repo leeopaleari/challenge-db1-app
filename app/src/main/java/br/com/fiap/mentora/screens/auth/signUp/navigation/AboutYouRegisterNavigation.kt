@@ -8,22 +8,19 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import br.com.fiap.mentora.core.navigation.MentoraNavigationDestination
-import br.com.fiap.mentora.screens.auth.signIn.navigation.SignInDestination
-import br.com.fiap.mentora.screens.auth.signUp.SignUpScreen
+import br.com.fiap.mentora.screens.auth.signUp.AboutYouRegisterScreen
 
-
-object SignUpDestination : MentoraNavigationDestination {
-    override val route = "signup_route"
-    override val destination = "signup_destination"
+object AboutYouRegisterDestination : MentoraNavigationDestination {
+    override val route = "aboutyouregister_route"
+    override val destination = "aboutyouregister_destination"
 }
 
-
-fun NavGraphBuilder.signUpGraph(
+fun NavGraphBuilder.aboutYouRegisterGraph(
     navController: NavController,
     bottomBarVisibility: MutableState<Boolean>
 ) {
     composable(
-        SignUpDestination.route,
+        AboutYouRegisterDestination.route,
         enterTransition = {
             when (initialState.destination.route) {
                 SignUpDestination.route -> slideIntoContainer(
@@ -31,7 +28,7 @@ fun NavGraphBuilder.signUpGraph(
                     tween(durationMillis = 300)
                 )
 
-                AboutYouRegisterDestination.route -> slideIntoContainer(
+                YourHabilitiesNavigation.route -> slideIntoContainer(
                     AnimatedContentTransitionScope.SlideDirection.Right,
                     tween(durationMillis = 300)
                 )
@@ -40,33 +37,30 @@ fun NavGraphBuilder.signUpGraph(
             }
         }, exitTransition = {
             when (targetState.destination.route) {
-                SignInDestination.route -> slideOutOfContainer(
+                SignUpDestination.route -> slideOutOfContainer(
                     AnimatedContentTransitionScope.SlideDirection.Right,
                     tween(durationMillis = 300)
                 )
 
-                AboutYouRegisterDestination.route -> slideOutOfContainer(
+                YourHabilitiesNavigation.route -> slideOutOfContainer(
                     AnimatedContentTransitionScope.SlideDirection.Left,
                     tween(durationMillis = 300)
                 )
 
                 else -> null
             }
-        }
-    ) {
+        }) {
         LaunchedEffect(null) {
             bottomBarVisibility.value = false
         }
 
-        SignUpScreen(
+        AboutYouRegisterScreen(
             onPopBackStack = {
                 navController.navigateUp();
             },
-            onNavigateToProfileScreen = {
-                navController.navigate(AboutYouRegisterDestination.route)
+            navigateToYourHabilitiesScreen = {
+
             }
         )
     }
-
-
 }

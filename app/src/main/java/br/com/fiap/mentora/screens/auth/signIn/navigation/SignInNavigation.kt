@@ -2,34 +2,58 @@ package br.com.fiap.mentora.screens.auth.signIn.navigation
 
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.tween
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
+import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigation
+import br.com.fiap.mentora.core.navigation.MentoraNavigationDestination
+import br.com.fiap.mentora.screens.app.home.destination.HomeDestination
 import br.com.fiap.mentora.screens.auth.signIn.SignInScreen
+import br.com.fiap.mentora.screens.auth.signUp.navigation.SignUpDestination
 
-const val signInRoute = "signin_route"
+object SignInDestination : MentoraNavigationDestination {
+    override val destination = "signin_destination"
+    override val route = "signin_route"
+
+}
 
 
-fun NavGraphBuilder.signInScreen(
-    onNavigateToSignUpScreen: () -> Unit,
-    onNavigateToAppScaffold: () -> Unit,
+fun NavGraphBuilder.signInGraph(
+    navController: NavController,
+    bottomBarVisibility: MutableState<Boolean>,
 ) {
     composable(
-        signInRoute,
+        SignInDestination.route,
         enterTransition = {
             slideIntoContainer(
-                AnimatedContentTransitionScope.SlideDirection.Right,
-                tween(durationMillis = 300)
+                AnimatedContentTransitionScope.SlideDirection.Right, tween(durationMillis = 300)
             )
-        },
-        exitTransition = {
+        }, exitTransition = {
             slideOutOfContainer(
-                AnimatedContentTransitionScope.SlideDirection.Left,
-                tween(durationMillis = 300)
+                AnimatedContentTransitionScope.SlideDirection.Left, tween(durationMillis = 300)
             )
-        }) {
+        }
+    ) {
+        LaunchedEffect(null) {
+            bottomBarVisibility.value = false
+        }
+
         SignInScreen(
-            onNavigateToSignUpScreen = onNavigateToSignUpScreen,
-            onNavigateToAppScaffold = onNavigateToAppScaffold
+            onNavigateToSignUpScreen = {
+                navController.navigate(SignUpDestination.route)
+            },
+            onNavigateToAppScaffold = {
+                navController.navigate(HomeDestination.route) {
+                    popUpTo(navController.graph.findStartDestination().id) {
+                        saveState = true
+                    }
+                    launchSingleTop = true
+                    restoreState = true
+                }
+            }
         )
     }
 }
