@@ -15,6 +15,7 @@ import br.com.fiap.mentora.screens.auth.signIn.navigation.SignInDestination
 import br.com.fiap.mentora.screens.auth.signIn.navigation.signInGraph
 import br.com.fiap.mentora.screens.auth.signUp.AboutYouRegisterScreen
 import br.com.fiap.mentora.screens.auth.signUp.navigation.aboutYouRegisterGraph
+import br.com.fiap.mentora.screens.auth.signUp.navigation.signUpFlowGraph
 import br.com.fiap.mentora.screens.auth.signUp.navigation.signUpGraph
 import br.com.fiap.mentora.screens.auth.signUp.navigation.yourHabilitiesGraph
 
@@ -52,15 +53,7 @@ fun MentoraNavHost(
             bottomBarVisibility = bottomBarVisibility
         )
 
-        signUpGraph(
-            navController = navController,
-            bottomBarVisibility = bottomBarVisibility
-        )
-        aboutYouRegisterGraph(
-            navController = navController,
-            bottomBarVisibility = bottomBarVisibility
-        )
-        yourHabilitiesGraph(
+        signUpFlowGraph(
             navController = navController,
             bottomBarVisibility = bottomBarVisibility
         )

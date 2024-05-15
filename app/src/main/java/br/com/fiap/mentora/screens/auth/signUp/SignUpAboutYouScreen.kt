@@ -46,7 +46,7 @@ fun AboutYouRegisterScreen(
 ) {
 
     val uiState by viewModel.uiState.collectAsState()
-
+    Log.i("teste", "AboutYouRegisterScreen: ${uiState.fullName}")
     Scaffold(
         containerColor = BackgroundDark
     ) { innerPadding ->
@@ -76,7 +76,7 @@ fun AboutYouRegisterScreen(
                     )
                     Text(
                         text = "${
-                            uiState.fullName
+                            uiState.fullName.split(" ")[0]
                         }.",
                         fontSize = 20.sp,
                         color = PrimaryColor,

@@ -13,13 +13,12 @@ import br.com.fiap.mentora.core.navigation.MentoraNavigationDestination
 import br.com.fiap.mentora.screens.app.home.destination.HomeDestination
 import br.com.fiap.mentora.screens.auth.signIn.SignInScreen
 import br.com.fiap.mentora.screens.auth.signUp.navigation.SignUpDestination
+import br.com.fiap.mentora.screens.auth.signUp.navigation.SignUpFlowDestination
 
 object SignInDestination : MentoraNavigationDestination {
     override val destination = "signin_destination"
     override val route = "signin_route"
-
 }
-
 
 fun NavGraphBuilder.signInGraph(
     navController: NavController,
@@ -43,7 +42,7 @@ fun NavGraphBuilder.signInGraph(
 
         SignInScreen(
             onNavigateToSignUpScreen = {
-                navController.navigate(SignUpDestination.route)
+                navController.navigate(SignUpFlowDestination.route)
             },
             onNavigateToAppScaffold = {
                 navController.navigate(HomeDestination.route) {

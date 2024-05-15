@@ -27,10 +27,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import br.com.fiap.mentora.common.button.BaseButton
 import br.com.fiap.mentora.common.button.ButtonType
 import br.com.fiap.mentora.common.chip.HabilityCard
 import br.com.fiap.mentora.screens.auth.signUp.components.SkillSlider
+import br.com.fiap.mentora.screens.auth.signUp.viewmodel.SignUpViewModel
 import br.com.fiap.mentora.ui.theme.BackgroundDark
 import br.com.fiap.mentora.ui.theme.MontserratSemiBold
 import br.com.fiap.mentora.ui.theme.PrimaryColor
@@ -42,7 +44,8 @@ import br.com.fiap.mentora.ui.theme.TextContrast
 fun YourHabilitiesScreen(
     modifier: Modifier = Modifier,
     onPopBackStack: () -> Unit,
-    onNavigateToHome: () -> Unit
+    onNavigateToHome: () -> Unit,
+    viewModel: SignUpViewModel = hiltViewModel()
 ) {
     val scrollState = rememberScrollState()
 
