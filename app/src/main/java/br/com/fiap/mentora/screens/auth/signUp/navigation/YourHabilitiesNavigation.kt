@@ -9,10 +9,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import androidx.transition.Visibility
 import br.com.fiap.mentora.core.navigation.MentoraNavigationDestination
+import br.com.fiap.mentora.navigation.sharedViewModel
 import br.com.fiap.mentora.screens.app.home.destination.HomeDestination
 import br.com.fiap.mentora.screens.auth.signUp.YourHabilitiesScreen
 import br.com.fiap.mentora.screens.auth.signUp.viewmodel.SignUpViewModel
@@ -30,7 +29,7 @@ fun NavGraphBuilder.yourHabilitiesGraph(
         YourHabilitiesNavigation.route,
         enterTransition = {
             when (initialState.destination.route) {
-                AboutYouRegisterDestination.route -> slideIntoContainer(
+                SignUpAboutYouDestination.route -> slideIntoContainer(
                     AnimatedContentTransitionScope.SlideDirection.Left,
                     tween(durationMillis = 300)
                 )
@@ -39,7 +38,7 @@ fun NavGraphBuilder.yourHabilitiesGraph(
             }
         }, exitTransition = {
             when (targetState.destination.route) {
-                AboutYouRegisterDestination.route -> slideOutOfContainer(
+                SignUpAboutYouDestination.route -> slideOutOfContainer(
                     AnimatedContentTransitionScope.SlideDirection.Right,
                     tween(durationMillis = 300)
                 )
@@ -52,10 +51,8 @@ fun NavGraphBuilder.yourHabilitiesGraph(
             bottomBarVisibility.value = false
         }
 
-        val signUpBackStackEntry = remember {
-            navController.getBackStackEntry(SignUpFlowDestination.route)
-        }
-        val signUpViewModel: SignUpViewModel = hiltViewModel(signUpBackStackEntry);
+        val signUpViewModel = it.sharedViewModel<SignUpViewModel>(navController)
+
 
         YourHabilitiesScreen(
             onPopBackStack = {

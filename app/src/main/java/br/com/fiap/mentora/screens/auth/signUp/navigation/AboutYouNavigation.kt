@@ -10,20 +10,21 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import br.com.fiap.mentora.core.navigation.MentoraNavigationDestination
+import br.com.fiap.mentora.navigation.sharedViewModel
 import br.com.fiap.mentora.screens.auth.signUp.AboutYouRegisterScreen
 import br.com.fiap.mentora.screens.auth.signUp.viewmodel.SignUpViewModel
 
-object AboutYouRegisterDestination : MentoraNavigationDestination {
-    override val route = "aboutyouregister_route"
-    override val destination = "aboutyouregister_destination"
+object SignUpAboutYouDestination : MentoraNavigationDestination {
+    override val route = "aboutyou_route"
+    override val destination = "aboutyou_destination"
 }
 
-fun NavGraphBuilder.aboutYouRegisterGraph(
+fun NavGraphBuilder.signUpAboutYouGraph(
     navController: NavController,
     bottomBarVisibility: MutableState<Boolean>
 ) {
     composable(
-        AboutYouRegisterDestination.route,
+        SignUpAboutYouDestination.route,
         enterTransition = {
             when (initialState.destination.route) {
                 SignUpDestination.route -> slideIntoContainer(
@@ -56,10 +57,8 @@ fun NavGraphBuilder.aboutYouRegisterGraph(
         LaunchedEffect(null) {
             bottomBarVisibility.value = false
         }
-        val signUpBackStackEntry = remember {
-            navController.getBackStackEntry(SignUpFlowDestination.route)
-        }
-        val signUpViewModel: SignUpViewModel = hiltViewModel(signUpBackStackEntry);
+        val signUpViewModel = it.sharedViewModel<SignUpViewModel>(navController)
+
         AboutYouRegisterScreen(
             onPopBackStack = {
                 navController.navigateUp();

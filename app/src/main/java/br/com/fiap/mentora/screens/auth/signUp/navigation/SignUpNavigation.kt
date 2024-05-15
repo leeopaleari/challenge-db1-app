@@ -10,6 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import br.com.fiap.mentora.core.navigation.MentoraNavigationDestination
+import br.com.fiap.mentora.navigation.sharedViewModel
 import br.com.fiap.mentora.screens.auth.signIn.navigation.SignInDestination
 import br.com.fiap.mentora.screens.auth.signUp.SignUpScreen
 import br.com.fiap.mentora.screens.auth.signUp.viewmodel.SignUpViewModel
@@ -32,7 +33,7 @@ fun NavGraphBuilder.signUpGraph(
                     tween(durationMillis = 300)
                 )
 
-                AboutYouRegisterDestination.route -> slideIntoContainer(
+                SignUpAboutYouDestination.route -> slideIntoContainer(
                     AnimatedContentTransitionScope.SlideDirection.Right,
                     tween(durationMillis = 300)
                 )
@@ -46,7 +47,7 @@ fun NavGraphBuilder.signUpGraph(
                     tween(durationMillis = 300)
                 )
 
-                AboutYouRegisterDestination.route -> slideOutOfContainer(
+                SignUpAboutYouDestination.route -> slideOutOfContainer(
                     AnimatedContentTransitionScope.SlideDirection.Left,
                     tween(durationMillis = 300)
                 )
@@ -58,16 +59,14 @@ fun NavGraphBuilder.signUpGraph(
         LaunchedEffect(null) {
             bottomBarVisibility.value = false
         }
-        val signUpBackStackEntry = remember {
-            navController.getBackStackEntry(SignUpFlowDestination.route)
-        }
-        val signUpViewModel: SignUpViewModel = hiltViewModel(signUpBackStackEntry);
+        val signUpViewModel = it.sharedViewModel<SignUpViewModel>(navController)
+
         SignUpScreen(
             onPopBackStack = {
                 navController.navigateUp();
             },
             onNavigateToProfileScreen = {
-                navController.navigate(AboutYouRegisterDestination.route)
+                navController.navigate(SignUpAboutYouDestination.route)
             },
             viewModel = signUpViewModel
         )

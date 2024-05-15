@@ -20,8 +20,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.capitalize
-import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -34,7 +32,6 @@ import br.com.fiap.mentora.ui.theme.BackgroundDark
 import br.com.fiap.mentora.ui.theme.MontserratBold
 import br.com.fiap.mentora.ui.theme.PrimaryColor
 import br.com.fiap.mentora.ui.theme.TextColorPrimary
-import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
