@@ -1,5 +1,6 @@
 package br.com.fiap.mentora.screens.auth.signUp
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,26 +16,37 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.capitalize
+import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import br.com.fiap.mentora.common.button.BaseButton
 import br.com.fiap.mentora.common.button.ButtonType
 import br.com.fiap.mentora.common.chip.CustomInputChip
 import br.com.fiap.mentora.common.input.BaseInputField
+import br.com.fiap.mentora.screens.auth.signUp.viewmodel.SignUpViewModel
 import br.com.fiap.mentora.ui.theme.BackgroundDark
 import br.com.fiap.mentora.ui.theme.MontserratBold
 import br.com.fiap.mentora.ui.theme.PrimaryColor
 import br.com.fiap.mentora.ui.theme.TextColorPrimary
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun AboutYouRegisterScreen(
     modifier: Modifier = Modifier,
     navigateToYourHabilitiesScreen: () -> Unit,
-    onPopBackStack: () -> Unit
+    onPopBackStack: () -> Unit,
+    viewModel: SignUpViewModel = hiltViewModel()
 ) {
+
+    val uiState by viewModel.uiState.collectAsState()
+
     Scaffold(
         containerColor = BackgroundDark
     ) { innerPadding ->
@@ -63,7 +75,9 @@ fun AboutYouRegisterScreen(
                         color = TextColorPrimary
                     )
                     Text(
-                        text = "Leonardo.",
+                        text = "${
+                            uiState.fullName
+                        }.",
                         fontSize = 20.sp,
                         color = PrimaryColor,
                         fontFamily = MontserratBold
@@ -80,7 +94,9 @@ fun AboutYouRegisterScreen(
                 Spacer(modifier = Modifier.height(20.dp))
 
                 BaseInputField(
-                    onValueChange = {},
+                    onValueChange = {
+                        uiState.onAboutMeChange(it)
+                    },
                     label = "Sobre você",
                     placeholder = "Fale um pouco sobre você",
                     textArea = true,
@@ -136,6 +152,7 @@ fun AboutYouRegisterScreen(
                     Spacer(modifier = Modifier.width(16.dp))
                     BaseButton(
                         text = "Próximo",
+                        enabled = uiState.canNavigateToYourHabilities(),
                         onClick = { navigateToYourHabilitiesScreen() },
                         modifier = Modifier.weight(0.5f)
                     )

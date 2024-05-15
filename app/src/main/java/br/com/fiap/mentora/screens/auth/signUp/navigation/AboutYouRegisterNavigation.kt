@@ -59,7 +59,7 @@ fun NavGraphBuilder.aboutYouRegisterGraph(
                 navController.navigateUp();
             },
             navigateToYourHabilitiesScreen = {
-
+                navController.navigate(YourHabilitiesNavigation.route)
             }
         )
     }

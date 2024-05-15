@@ -21,15 +21,17 @@ fun BaseButton(
     modifier: Modifier = Modifier,
     text: String,
     onClick: () -> Unit,
-    buttonType: ButtonType = ButtonType.SOLID
+    buttonType: ButtonType = ButtonType.SOLID,
+    enabled: Boolean = true,
 ) {
     Button(
-        modifier = modifier        ,
+        modifier = modifier,
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = if (buttonType == ButtonType.OUTLINED) BackgroundDark
             else PrimaryColor
-        )
+        ),
+        enabled = enabled
     ) {
         Text(
             text = text,

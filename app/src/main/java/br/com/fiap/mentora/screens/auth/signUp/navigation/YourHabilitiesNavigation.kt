@@ -5,11 +5,13 @@ import androidx.compose.animation.core.tween
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.transition.Visibility
 import br.com.fiap.mentora.core.navigation.MentoraNavigationDestination
+import br.com.fiap.mentora.screens.app.home.destination.HomeDestination
 import br.com.fiap.mentora.screens.auth.signUp.YourHabilitiesScreen
 
 object YourHabilitiesNavigation : MentoraNavigationDestination {
@@ -50,6 +52,15 @@ fun NavGraphBuilder.yourHabilitiesGraph(
         YourHabilitiesScreen(
             onPopBackStack = {
                 navController.navigateUp()
+            },
+            onNavigateToHome = {
+                navController.navigate(HomeDestination.route) {
+                    popUpTo(navController.graph.findStartDestination().id) {
+                        saveState = true
+                    }
+                    launchSingleTop = true
+                    restoreState = true
+                }
             }
         )
     }

@@ -39,7 +39,11 @@ import br.com.fiap.mentora.ui.theme.TextContrast
 
 
 @Composable
-fun YourHabilitiesScreen(modifier: Modifier = Modifier, onPopBackStack: () -> Unit) {
+fun YourHabilitiesScreen(
+    modifier: Modifier = Modifier,
+    onPopBackStack: () -> Unit,
+    onNavigateToHome: () -> Unit
+) {
     val scrollState = rememberScrollState()
 
     Scaffold(
@@ -106,7 +110,7 @@ fun YourHabilitiesScreen(modifier: Modifier = Modifier, onPopBackStack: () -> Un
                 Spacer(modifier = Modifier.width(16.dp))
                 BaseButton(
                     text = "Concluir",
-                    onClick = { /*TODO*/ },
+                    onClick = { onNavigateToHome() },
                     modifier = Modifier.weight(0.5f)
                 )
             }

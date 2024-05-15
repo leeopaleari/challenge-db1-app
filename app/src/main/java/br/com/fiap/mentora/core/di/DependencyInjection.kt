@@ -7,5 +7,7 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 class DependencyInjection {
-
+//    @Provides
+//    @ViewModelScoped
+//    fun provideSignUpViewModel(): SignUpViewModel = SignUpViewModel()
 }

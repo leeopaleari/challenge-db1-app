@@ -11,12 +11,10 @@ import br.com.fiap.mentora.core.navigation.MentoraNavigationDestination
 import br.com.fiap.mentora.screens.auth.signIn.navigation.SignInDestination
 import br.com.fiap.mentora.screens.auth.signUp.SignUpScreen
 
-
 object SignUpDestination : MentoraNavigationDestination {
     override val route = "signup_route"
     override val destination = "signup_destination"
 }
-
 
 fun NavGraphBuilder.signUpGraph(
     navController: NavController,
