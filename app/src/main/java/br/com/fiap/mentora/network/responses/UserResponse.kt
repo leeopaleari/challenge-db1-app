@@ -18,6 +18,6 @@ data class User(
 )
 
 data class Skills(
-    val frontend: List<String>,
-    val backend: List<String>,
+    val frontend: List<String> = emptyList(),
+    val backend: List<String> = emptyList(),
 )

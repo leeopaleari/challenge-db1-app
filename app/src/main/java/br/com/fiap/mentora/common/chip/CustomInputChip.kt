@@ -9,10 +9,6 @@ import androidx.compose.material3.InputChip
 import androidx.compose.material3.InputChipDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -23,16 +19,17 @@ import br.com.fiap.mentora.ui.theme.TextContrast
 @Composable
 fun CustomInputChip(
     text: String,
-    onDismiss: () -> Unit,
+    onClick: () -> Unit,
+    isSelected: Boolean
 ) {
-    var enabled by remember { mutableStateOf(false) }
+//    var enabled by remember { mutableStateOf(false) }
 
     InputChip(
         onClick = {
-            enabled = !enabled
+            onClick()
         },
         label = { Text(text) },
-        selected = enabled,
+        selected = isSelected,
         colors = InputChipDefaults.inputChipColors(
             containerColor = Color(0xFF011B2E),
             labelColor = Color(0xFF2BDEFD),
@@ -44,7 +41,7 @@ fun CustomInputChip(
             borderColor = Color(0xFF011B2E)
         ),
         avatar = {
-            if (enabled) {
+            if (isSelected) {
                 Icon(
                     modifier = Modifier.size(20.dp),
                     imageVector = Icons.Filled.Done,

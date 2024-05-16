@@ -104,17 +104,22 @@ fun AboutYouRegisterScreen(
                 Text(text = "Frontend", Modifier.fillMaxWidth())
 
                 Spacer(modifier = Modifier.height(8.dp))
+                val frontendSkills = listOf("Html", "Css", "JavaScript", "React", "Vue", "Angular")
+                val selectedFrontendSkills = mutableListOf<String>()
 
                 FlowRow(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    CustomInputChip(text = "Html", onDismiss = {})
-                    CustomInputChip(text = "Css", onDismiss = {})
-                    CustomInputChip(text = "JavaScript", onDismiss = {})
-                    CustomInputChip(text = "React", onDismiss = {})
-                    CustomInputChip(text = "Vue", onDismiss = {})
-                    CustomInputChip(text = "Angular", onDismiss = {})
+                    frontendSkills.forEach { skill ->
+                        CustomInputChip(
+                            text = skill,
+                            isSelected = selectedFrontendSkills.contains(skill),
+                            onClick = {
+                                selectedFrontendSkills.add(skill)
+                            }
+                        )
+                    }
                 }
 
                 Spacer(modifier = Modifier.height(20.dp))
@@ -123,16 +128,22 @@ fun AboutYouRegisterScreen(
 
                 Spacer(modifier = Modifier.height(8.dp))
 
+                val backendSkills =
+                    listOf("Node.js", ".NET", "Python", "Go", "Java", "Spring Boot", "Laravel")
+                val selectedBackendSkills = mutableListOf<String>()
                 FlowRow(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    CustomInputChip(text = "NodeJs", onDismiss = {})
-                    CustomInputChip(text = "C# / Dotnet", onDismiss = {})
-                    CustomInputChip(text = "Python", onDismiss = {})
-                    CustomInputChip(text = "Go", onDismiss = {})
-                    CustomInputChip(text = "Java", onDismiss = {})
-                    CustomInputChip(text = "TypeScript", onDismiss = {})
+                    backendSkills.forEach { skill ->
+                        CustomInputChip(
+                            text = skill,
+                            isSelected = selectedBackendSkills.contains(skill),
+                            onClick = {
+                                selectedBackendSkills.add(skill)
+                            }
+                        )
+                    }
                 }
 
                 Spacer(modifier = Modifier.weight(1f))

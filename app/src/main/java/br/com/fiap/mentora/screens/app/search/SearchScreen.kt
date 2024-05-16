@@ -1,6 +1,5 @@
 package br.com.fiap.mentora.screens.app.search
 
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -21,9 +20,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.List
@@ -35,9 +32,10 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -47,6 +45,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.hilt.navigation.compose.hiltViewModel
 import br.com.fiap.mentora.R
+import br.com.fiap.mentora.common.chip.CustomInputChip
 import br.com.fiap.mentora.common.chip.HabilityCard
 import br.com.fiap.mentora.common.input.BaseInputField
 import br.com.fiap.mentora.network.responses.User
@@ -56,47 +55,14 @@ import br.com.fiap.mentora.ui.theme.MontserratMedium
 import br.com.fiap.mentora.ui.theme.TextColorPrimary
 
 @Composable
-fun SearchScreen(
-    viewModel: SearchViewModel = hiltViewModel()
-) {
+fun SearchScreen(viewModel: SearchViewModel = hiltViewModel()) {
     val uiState by viewModel.uiState.collectAsState()
+    val filteredUsers by viewModel.filteredUsers.collectAsState()
 
     when {
-        uiState.isError -> {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color.Red)
-            ) {
-                Text(
-                    text = "Falha ao buscar o endereço",
-                    Modifier
-                        .padding(8.dp)
-                        .align(Alignment.Center),
-                    color = Color.White
-                )
-            }
-        }
-
-        uiState.isLoading -> {
-            MyCircularProgress()
-        }
-    }
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(start = 10.dp, end = 10.dp, top = 15.dp)
-    ) {
-        TopSearchAndFilter(uiState)
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        LazyColumn() {
-            items(uiState.users) { user ->
-                MatchItem(user = user)
-            }
-        }
-
+        uiState.isError -> ErrorBox()
+        uiState.isLoading -> MyCircularProgress()
+        else -> Content(uiState, filteredUsers, viewModel)
     }
 }
 
@@ -116,53 +82,140 @@ fun MyCircularProgress() {
 }
 
 @Composable
-private fun TopSearchAndFilter(uiState: SearchUiState) {
+private fun TopSearchAndFilter(uiState: SearchUiState, viewModel: SearchViewModel) {
+    val frontendSkills = remember { listOf("Html", "Css", "JavaScript", "React", "Vue", "Angular") }
+    val backendSkills = remember { listOf("Node.js", ".NET", "Python", "Go", "Java", "Spring Boot", "Laravel") }
+    val selectedSkills by viewModel.selectedSkills.collectAsState()
+
     Column(modifier = Modifier.fillMaxWidth()) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth()
+        SearchBar(uiState = uiState, viewModel = viewModel)
+        AnimatedVisibility(visible = uiState.showFilters) {
+            FilterSection(frontendSkills, backendSkills, selectedSkills, viewModel)
+        }
+    }
+}
+
+@Composable
+fun SearchBar(uiState: SearchUiState, viewModel: SearchViewModel) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Box(
+            modifier = Modifier.weight(1f)
         ) {
-            Box(
-                modifier = Modifier.weight(1f)
-            ) {
-                BaseInputField(
-                    onValueChange = {},
-                    label = "Pesquise por competência",
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Filled.Search,
-                            contentDescription = "Icon button",
-                            tint = TextColorPrimary
-                        )
-                    }
-                )
-            }
-
-            Spacer(modifier = Modifier.width(10.dp))
-
-            Button(
-                onClick = {
-                    uiState.onToggleFilter(!uiState.showFilters)
-                    Log.i("SearchScreen", "TopSearchAndFilter: ${uiState.showFilters}")
-                },
-                shape = RoundedCornerShape(5.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Transparent
-                ),
-                modifier = Modifier
-                    .offset(y = 5.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.List,
-                    contentDescription = "Botão Filtros",
-                    tint = TextColorPrimary,
-                )
-            }
+            BaseInputField(
+                onValueChange = {},
+                label = "Pesquise por competência",
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Filled.Search,
+                        contentDescription = "Icon button",
+                        tint = TextColorPrimary
+                    )
+                }
+            )
         }
 
-        AnimatedVisibility(visible = uiState.showFilters) {
-            Text(text = "Filtros")
+        Spacer(modifier = Modifier.width(10.dp))
+
+        FilterButton(uiState = uiState)
+    }
+}
+
+@Composable
+fun FilterButton(uiState: SearchUiState) {
+    val onToggleFilter = rememberUpdatedState(uiState.onToggleFilter)
+
+    Button(
+        onClick = {
+            onToggleFilter.value(!uiState.showFilters)
+        },
+        shape = RoundedCornerShape(5.dp),
+        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+        modifier = Modifier.offset(y = 5.dp)
+    ) {
+        Icon(
+            imageVector = Icons.Outlined.List,
+            contentDescription = "Botão Filtros",
+            tint = TextColorPrimary,
+        )
+    }
+}
+
+@Composable
+fun FilterSection(
+    frontendSkills: List<String>,
+    backendSkills: List<String>,
+    selectedSkills: List<String>,
+    viewModel: SearchViewModel
+) {
+    Column(modifier = Modifier.padding(top = 20.dp)) {
+        Text(text = "Frontend", Modifier.fillMaxWidth())
+        Spacer(modifier = Modifier.height(8.dp))
+        SkillChips(skills = frontendSkills, selectedSkills = selectedSkills, onClick = viewModel::onSelectSkill)
+        Spacer(modifier = Modifier.height(20.dp))
+        Text(text = "Backend", Modifier.fillMaxWidth())
+        Spacer(modifier = Modifier.height(8.dp))
+        SkillChips(skills = backendSkills, selectedSkills = selectedSkills, onClick = viewModel::onSelectSkill)
+    }
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+fun SkillChips(skills: List<String>, selectedSkills: List<String>, onClick: (String) -> Unit) {
+    FlowRow(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        skills.forEach { skill ->
+            CustomInputChip(
+                text = skill,
+                isSelected = selectedSkills.contains(skill),
+                onClick = { onClick(skill) }
+            )
+        }
+    }
+}
+
+
+
+@Composable
+fun ErrorBox() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.Red)
+    ) {
+        Text(
+            text = "Falha ao buscar o endereço",
+            Modifier
+                .padding(8.dp)
+                .align(Alignment.Center),
+            color = Color.White
+        )
+    }
+}
+
+@Composable
+fun Content(uiState: SearchUiState, filteredUsers: List<User>, viewModel: SearchViewModel) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(start = 10.dp, end = 10.dp, top = 15.dp)
+    ) {
+        TopSearchAndFilter(uiState, viewModel)
+        Spacer(modifier = Modifier.height(20.dp))
+        UserList(filteredUsers)
+    }
+}
+
+@Composable
+fun UserList(users: List<User>) {
+    LazyColumn {
+        items(users) { user ->
+            MatchItem(user = user)
         }
     }
 }
@@ -170,21 +223,13 @@ private fun TopSearchAndFilter(uiState: SearchUiState) {
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun MatchItem(user: User) {
-    Box(
-        modifier = Modifier.padding(bottom = 20.dp)
-    ) {
+    Box(modifier = Modifier.padding(bottom = 20.dp)) {
         Card(
             border = BorderStroke(width = 2.dp, color = Color(0xFF012640)),
-            colors = CardDefaults.cardColors(
-                containerColor = Color(0xFF021017)
-            )
+            colors = CardDefaults.cardColors(containerColor = Color(0xFF021017))
         ) {
-            Row(
-                modifier = Modifier.padding(16.dp)
-            ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
+            Row(modifier = Modifier.padding(16.dp)) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Image(
                         painter = painterResource(id = R.drawable.profile_match_img),
                         contentDescription = "",
@@ -192,9 +237,7 @@ private fun MatchItem(user: User) {
                     )
                     Text(text = user.name.split(" ")[0], fontSize = 12.sp)
                 }
-
                 Spacer(modifier = Modifier.width(10.dp))
-
                 Column {
                     Text(
                         text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...",
@@ -203,14 +246,10 @@ private fun MatchItem(user: User) {
                         fontSize = 12.sp,
                         lineHeight = 17.sp
                     )
-
                     Spacer(modifier = Modifier.height(10.dp))
-
-                    FlowRow(
-                        horizontalArrangement = Arrangement.spacedBy(space = 4.dp),
-                    ) {
-                        user.skills.frontend.plus(user.skills.backend).forEach { it ->
-                            HabilityCard(text = it)
+                    FlowRow(horizontalArrangement = Arrangement.spacedBy(space = 4.dp)) {
+                        user.skills.frontend.plus(user.skills.backend).forEach { skill ->
+                            HabilityCard(text = skill)
                         }
                     }
                 }
