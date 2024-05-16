@@ -14,7 +14,8 @@ class UserResponse(
 data class User(
     val name: String = "",
     val email: String = "",
-    val skills: Skills
+    val skills: Skills,
+    val aboutYou: String = ""
 )
 
 data class Skills(

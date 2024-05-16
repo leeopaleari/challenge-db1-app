@@ -11,6 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import br.com.fiap.mentora.screens.app.favorites.destination.favoritesGraph
+import br.com.fiap.mentora.screens.app.home.destination.HomeDestination
 import br.com.fiap.mentora.screens.app.home.destination.homeGraph
 import br.com.fiap.mentora.screens.app.profile.navigation.profileGraph
 import br.com.fiap.mentora.screens.app.search.destination.searchGraph
@@ -24,7 +25,7 @@ fun MentoraNavHost(
     bottomBarVisibility: MutableState<Boolean>,
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    startDestination: String = AuthDestination.route
+    startDestination: String = HomeDestination.route
 ) {
     NavHost(
         navController = navController,

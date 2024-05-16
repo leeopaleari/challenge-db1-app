@@ -47,7 +47,11 @@ import br.com.fiap.mentora.ui.theme.PrimaryColor
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun MatchCard() {
+fun MatchCard(
+    onLike: () -> Unit,
+    onDislike: () -> Unit,
+    user: String
+) {
 
     Card(
         modifier = Modifier
@@ -60,7 +64,6 @@ fun MatchCard() {
         Column(
             modifier = Modifier
                 .padding(24.dp)
-                .padding(bottom = 50.dp),
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -71,7 +74,7 @@ fun MatchCard() {
                     contentDescription = ""
                 )
                 Text(
-                    text = "Miguel",
+                    text = user,
                     fontFamily = MontserratBold,
                     fontSize = 32.sp,
                     modifier = Modifier.fillMaxWidth(),
@@ -108,74 +111,76 @@ fun MatchCard() {
 
         }
 
-    }
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(
-            space = 8.dp,
-            alignment = Alignment.CenterHorizontally
-        ),
-        modifier = Modifier
-            .fillMaxWidth()
-            .offset(y = (-42).dp)
-    ) {
-        Button(
-            modifier = Modifier.size(60.dp),
-            onClick = {},
-            shape = CircleShape,
-            contentPadding = PaddingValues(0.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.White
-            )
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(
+                space = 8.dp,
+                alignment = Alignment.CenterHorizontally
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp)
         ) {
-            Icon(
-                imageVector = Icons.Outlined.Close,
-                contentDescription = "Botão Rejeitar",
-                modifier = Modifier.size(25.dp),
-                tint = Color(0xFF012640)
-            )
-        }
-
-        Button(
-            modifier = Modifier.size(80.dp),
-            onClick = {},
-            shape = CircleShape,
-            contentPadding = PaddingValues(0.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Transparent
-            )
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(
-                        Brush.verticalGradient(listOf(Color(0xFF011B2E), PrimaryColor))
-                    ),
-                contentAlignment = Alignment.Center,
+            Button(
+                modifier = Modifier.size(60.dp),
+                onClick = {},
+                shape = CircleShape,
+                contentPadding = PaddingValues(0.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White
+                )
             ) {
                 Icon(
-                    imageVector = Icons.Outlined.FavoriteBorder,
-                    contentDescription = "Botão Like",
-                    modifier = Modifier.size(40.dp),
-                    tint = Color.White
+                    imageVector = Icons.Outlined.Close,
+                    contentDescription = "Botão Rejeitar",
+                    modifier = Modifier.size(25.dp),
+                    tint = Color(0xFF012640)
                 )
             }
-        }
 
-        Button(
-            modifier = Modifier.size(60.dp),
-            onClick = {},
-            shape = CircleShape,
-            contentPadding = PaddingValues(0.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.White
-            )
-        ) {
-            Icon(
-                imageVector = Icons.Outlined.Star,
-                contentDescription = "Botão Favoritar",
-                tint = Color(0xFF012640)
-            )
+            Button(
+                modifier = Modifier.size(80.dp),
+                onClick = {
+                          onLike()
+                },
+                shape = CircleShape,
+                contentPadding = PaddingValues(0.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Transparent
+                )
+            ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(
+                            Brush.verticalGradient(listOf(Color(0xFF011B2E), PrimaryColor))
+                        ),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.FavoriteBorder,
+                        contentDescription = "Botão Like",
+                        modifier = Modifier.size(40.dp),
+                        tint = Color.White
+                    )
+                }
+            }
+
+            Button(
+                modifier = Modifier.size(60.dp),
+                onClick = {},
+                shape = CircleShape,
+                contentPadding = PaddingValues(0.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White
+                )
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Star,
+                    contentDescription = "Botão Favoritar",
+                    tint = Color(0xFF012640)
+                )
+            }
         }
     }
 }

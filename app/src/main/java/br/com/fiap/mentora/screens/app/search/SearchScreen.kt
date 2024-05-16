@@ -240,7 +240,7 @@ private fun MatchItem(user: User) {
                 Spacer(modifier = Modifier.width(10.dp))
                 Column {
                     Text(
-                        text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...",
+                        text = user.aboutYou,
                         color = Color(0xFFFFFFFF),
                         fontFamily = MontserratMedium,
                         fontSize = 12.sp,
