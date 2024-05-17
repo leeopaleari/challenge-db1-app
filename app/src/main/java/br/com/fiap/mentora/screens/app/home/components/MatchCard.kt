@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import br.com.fiap.mentora.R
 import br.com.fiap.mentora.common.chip.HabilityCard
+import br.com.fiap.mentora.domain.user.User
 import br.com.fiap.mentora.ui.theme.BackgroundDark
 import br.com.fiap.mentora.ui.theme.MontserratBold
 import br.com.fiap.mentora.ui.theme.PrimaryColor
@@ -50,7 +51,7 @@ import br.com.fiap.mentora.ui.theme.PrimaryColor
 fun MatchCard(
     onLike: () -> Unit,
     onDislike: () -> Unit,
-    user: String
+    user: User
 ) {
 
     Card(
@@ -74,7 +75,7 @@ fun MatchCard(
                     contentDescription = ""
                 )
                 Text(
-                    text = user,
+                    text = user.name,
                     fontFamily = MontserratBold,
                     fontSize = 32.sp,
                     modifier = Modifier.fillMaxWidth(),
@@ -86,7 +87,7 @@ fun MatchCard(
 
             Row {
                 Text(
-                    text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.",
+                    text = user.aboutYou,
                     color = Color(0xFFFFFFFF),
                     fontSize = 14.sp
                 )
@@ -100,13 +101,10 @@ fun MatchCard(
                 ),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                HabilityCard(text = "Html")
 
-                HabilityCard(text = "JavaScript")
-
-                HabilityCard(text = "NodeJS")
-
-                HabilityCard(text = "Angular")
+                user.skills.frontend.plus(user.skills.backend).forEach { skill ->
+                    HabilityCard(text = skill)
+                }
             }
 
         }

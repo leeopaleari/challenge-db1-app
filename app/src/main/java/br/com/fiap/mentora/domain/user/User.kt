@@ -1,12 +1,13 @@
 package br.com.fiap.mentora.domain.user
 
 data class User(
-    val fullName: String,
-    val email: String,
-    val phone: String,
-    val password: String,
-    val aboutMe: String,
-    val skills: List<String>,
-    val skillLevels: Map<String, String>,
-    val preferredTime: String
+    val name: String = "",
+    val email: String = "",
+    val skills: Skills,
+    val aboutYou: String = ""
+)
+
+data class Skills(
+    val frontend: List<String> = emptyList(),
+    val backend: List<String> = emptyList(),
 )

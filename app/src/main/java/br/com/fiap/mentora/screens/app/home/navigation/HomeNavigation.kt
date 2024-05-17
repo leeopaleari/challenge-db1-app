@@ -1,4 +1,4 @@
-package br.com.fiap.mentora.screens.app.home.destination
+package br.com.fiap.mentora.screens.app.home.navigation
 
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState

@@ -1,8 +1,9 @@
 package br.com.fiap.mentora.network.responses
 
+import br.com.fiap.mentora.domain.user.User
 import br.com.fiap.mentora.screens.app.search.state.SearchUiState
 
-class UserResponse(
+class StudentResponse(
     val usuarios: List<User>
 ) {
     fun toSearchScreenUiState() = SearchUiState(
@@ -11,14 +12,4 @@ class UserResponse(
         isError = false
     )
 }
-data class User(
-    val name: String = "",
-    val email: String = "",
-    val skills: Skills,
-    val aboutYou: String = ""
-)
 
-data class Skills(
-    val frontend: List<String> = emptyList(),
-    val backend: List<String> = emptyList(),
-)

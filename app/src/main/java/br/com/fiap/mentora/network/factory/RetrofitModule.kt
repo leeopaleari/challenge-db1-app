@@ -1,6 +1,7 @@
 package br.com.fiap.mentora.network.factory
 
-import br.com.fiap.mentora.network.api.UsersService
+import br.com.fiap.mentora.network.api.MentorService
+import br.com.fiap.mentora.network.api.StudentService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,6 +25,10 @@ object RetrofitModule {
 
     @Singleton
     @Provides
-    fun provideUserService(retrofit: Retrofit): UsersService = retrofit.create(UsersService::class.java)
+    fun provideStudentService(retrofit: Retrofit): StudentService = retrofit.create(StudentService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideMentorService(retrofit: Retrofit): MentorService = retrofit.create(MentorService::class.java)
 
 }

@@ -48,7 +48,7 @@ import br.com.fiap.mentora.R
 import br.com.fiap.mentora.common.chip.CustomInputChip
 import br.com.fiap.mentora.common.chip.HabilityCard
 import br.com.fiap.mentora.common.input.BaseInputField
-import br.com.fiap.mentora.network.responses.User
+import br.com.fiap.mentora.domain.user.User
 import br.com.fiap.mentora.screens.app.search.state.SearchUiState
 import br.com.fiap.mentora.screens.app.search.viewmodel.SearchViewModel
 import br.com.fiap.mentora.ui.theme.MontserratMedium

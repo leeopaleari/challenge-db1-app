@@ -1,6 +1,7 @@
 package br.com.fiap.mentora.screens.app.search.state
 
-import br.com.fiap.mentora.network.responses.User
+import br.com.fiap.mentora.domain.user.User
+
 
 data class SearchUiState(
     val users: List<User> = emptyList(),

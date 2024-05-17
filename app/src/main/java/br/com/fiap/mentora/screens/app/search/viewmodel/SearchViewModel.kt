@@ -1,11 +1,10 @@
 package br.com.fiap.mentora.screens.app.search.viewmodel
 
 import android.util.Log
-import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.fiap.mentora.network.api.UsersService
-import br.com.fiap.mentora.network.responses.User
+import br.com.fiap.mentora.domain.user.User
+import br.com.fiap.mentora.network.api.StudentService
 import br.com.fiap.mentora.screens.app.search.state.SearchUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject() constructor(
-    private val usersService: UsersService
+    private val studentService: StudentService
 ) : ViewModel() {
     private val TAG = "SearchViewModel"
 
@@ -82,7 +81,7 @@ class SearchViewModel @Inject() constructor(
         }
         _uiState.update {
             try {
-                usersService.getUsers().toSearchScreenUiState()
+                studentService.getUsers().toSearchScreenUiState()
             } catch (t: Throwable) {
                 Log.e(TAG, "loadUsers: ", t)
                 _uiState.value.copy(

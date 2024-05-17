@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import br.com.fiap.mentora.screens.app.favorites.destination.FavoritesDestination
-import br.com.fiap.mentora.screens.app.home.destination.HomeDestination
+import br.com.fiap.mentora.screens.app.home.navigation.HomeDestination
 import br.com.fiap.mentora.screens.app.profile.navigation.ProfileDestination
 import br.com.fiap.mentora.screens.app.search.destination.SearchDestination
 

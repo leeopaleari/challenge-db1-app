@@ -9,9 +9,10 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import br.com.fiap.mentora.core.navigation.MentoraNavigationDestination
-import br.com.fiap.mentora.screens.app.home.destination.HomeDestination
+import br.com.fiap.mentora.screens.app.home.navigation.HomeDestination
 import br.com.fiap.mentora.screens.auth.signIn.SignInScreen
 import br.com.fiap.mentora.screens.auth.signUp.navigation.AuthDestination
+import br.com.fiap.mentora.screens.auth.signUp.navigation.SignUpDestination
 
 object SignInDestination : MentoraNavigationDestination {
     override val destination = "signin_destination"
@@ -40,7 +41,7 @@ fun NavGraphBuilder.signInGraph(
 
         SignInScreen(
             onNavigateToSignUpScreen = {
-                navController.navigate(AuthDestination.route)
+                navController.navigate(SignUpDestination.route)
             },
             onNavigateToAppScaffold = {
                 navController.navigate(HomeDestination.route) {
