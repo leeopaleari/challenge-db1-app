@@ -1,5 +1,11 @@
 package br.com.fiap.mentora
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
@@ -24,13 +30,17 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -45,14 +55,7 @@ import br.com.fiap.mentora.ui.theme.PrimaryColor
 import br.com.fiap.mentora.ui.theme.TextContrast
 
 
-//data class BottomNavigationItem(
-//    val title: String,
-//    val route: String,
-//    val selectedIcon: ImageVector,
-//    val unselectedIcon: ImageVector,
-//    val badgeCount: Int? = null
-//)
-
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun MentoraApp() {
@@ -71,6 +74,27 @@ fun MentoraApp() {
 
             val navBackStackEntry by navController.currentBackStackEntryAsState()
             val currentDestination = navBackStackEntry?.destination
+            val context = LocalContext.current
+
+            var hasNotificationPermission by remember {
+                mutableStateOf(
+                    ContextCompat.checkSelfPermission(
+                        context,
+                        Manifest.permission.POST_NOTIFICATIONS
+                    ) == PackageManager.PERMISSION_GRANTED
+                )
+            }
+            val permissionLauncher =
+                rememberLauncherForActivityResult(
+                    contract = ActivityResultContracts.RequestPermission(),
+                    onResult = { isGranted ->
+                        hasNotificationPermission = isGranted
+
+//                    if (!isGranted) {
+//                        shouldShowRequestPermissionRationale(permission.POST_NOTIFICATIONS)
+//                    }
+                    }
+                )
 
             Scaffold(
                 containerColor = BackgroundDark,
@@ -91,6 +115,9 @@ fun MentoraApp() {
                     }
                 }
             ) { padding ->
+                LaunchedEffect(key1 = null) {
+                    permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                }
                 Row(
                     Modifier
                         .fillMaxSize()
@@ -109,7 +136,6 @@ fun MentoraApp() {
                             .zIndex(1f)
                     )
                 }
-
             }
         }
     }
