@@ -3,6 +3,8 @@ package br.com.fiap.mentora.screens.app.home.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.com.fiap.mentora.core.services.NotificationService
+import br.com.fiap.mentora.domain.user.User
 import br.com.fiap.mentora.network.api.MentorService
 import br.com.fiap.mentora.network.api.StudentService
 import br.com.fiap.mentora.screens.app.home.state.HomeUiState
@@ -12,10 +14,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.random.Random
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val studentService: StudentService, private val mentorService: MentorService
+    private val studentService: StudentService,
+    private val mentorService: MentorService,
+    private val notificationService: NotificationService
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeUiState())
@@ -23,7 +28,6 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-
             loadMentors()
         }
     }
@@ -44,5 +48,40 @@ class HomeViewModel @Inject constructor(
                 )
             }
         }
+    }
+
+    fun onLike(user: User) {
+        _uiState.update { currentState ->
+            val nextIndex = (currentState.indexToRender + 1) % currentState.users.size
+            currentState.copy(indexToRender = nextIndex)
+        }
+
+        val currentUserSkills = listOf("Go", "Node.js", "Python")
+        val commonSkills = user.skills.frontend.intersect(currentUserSkills) +
+                user.skills.backend.intersect(currentUserSkills)
+        Log.i("HomeViewModel", "onLike: $commonSkills")
+
+        if (commonSkills.isNotEmpty()) {
+            notificationService.sendNotification(
+                title = "Deu Match!",
+                message = "Conecte-se com ${user.name}"
+            )
+        }
+
+
+//        val shouldSendNotification = Random.nextInt(100) < 30 // 30% de chance de dar match
+//        if (shouldSendNotification) {
+//            notificationService.sendNotification(
+//                title = "Deu Match!",
+//                message = "Conecte-se com ${user.name}"
+//            )
+//        }
+
+    }
+
+    fun onDislike() {
+//        _uiState.update { currentState ->
+//            currentState.copy(indexToRender = currentState.indexToRender - 1)
+//        }
     }
 }

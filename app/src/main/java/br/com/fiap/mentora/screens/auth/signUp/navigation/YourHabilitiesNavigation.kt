@@ -9,7 +9,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import br.com.fiap.mentora.core.navigation.MentoraNavigationDestination
-import br.com.fiap.mentora.navigation.sharedViewModel
+import br.com.fiap.mentora.core.navigation.sharedViewModel
 import br.com.fiap.mentora.screens.app.home.navigation.HomeDestination
 import br.com.fiap.mentora.screens.auth.signUp.YourHabilitiesScreen
 import br.com.fiap.mentora.screens.auth.signUp.viewmodel.SignUpViewModel

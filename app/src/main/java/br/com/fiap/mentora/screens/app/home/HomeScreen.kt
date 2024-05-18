@@ -41,7 +41,7 @@ fun HomeScreen(
     when {
         uiState.isError -> ErrorBox()
         uiState.isLoading -> MyCircularProgress()
-        else -> Content(uiState)
+        else -> Content(uiState, viewModel)
     }
 }
 
@@ -80,26 +80,22 @@ fun ErrorBox() {
 
 
 @Composable
-fun Content(uiState: HomeUiState) {
+fun Content(uiState: HomeUiState, viewModel: HomeViewModel) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
 
-        var indexToRender by remember {
-            mutableIntStateOf(0)
-        }
-
-        uiState.users.forEachIndexed { index, item ->
+        uiState.users.forEachIndexed { index, user ->
             AnimatedVisibility(
-                visible = index == indexToRender,
+                visible = index == uiState.indexToRender,
             ) {
                 MatchCard(
-                    user = item,
+                    user = user,
                     onLike = {
-                        indexToRender += 1
-                        Log.i("HOME", indexToRender.toString())
+                        viewModel.onLike(user)
+                        Log.i("HOME", uiState.indexToRender.toString())
                     },
                     onDislike = {
 

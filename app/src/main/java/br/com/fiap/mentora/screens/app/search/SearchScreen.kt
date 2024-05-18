@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -51,8 +52,12 @@ import br.com.fiap.mentora.common.input.BaseInputField
 import br.com.fiap.mentora.domain.user.User
 import br.com.fiap.mentora.screens.app.search.state.SearchUiState
 import br.com.fiap.mentora.screens.app.search.viewmodel.SearchViewModel
+import br.com.fiap.mentora.ui.theme.MontserratBold
 import br.com.fiap.mentora.ui.theme.MontserratMedium
+import br.com.fiap.mentora.ui.theme.MontserratSemiBold
+import br.com.fiap.mentora.ui.theme.PrimaryColor
 import br.com.fiap.mentora.ui.theme.TextColorPrimary
+import br.com.fiap.mentora.ui.theme.TextContrast
 
 @Composable
 fun SearchScreen(viewModel: SearchViewModel = hiltViewModel()) {
@@ -84,7 +89,8 @@ fun MyCircularProgress() {
 @Composable
 private fun TopSearchAndFilter(uiState: SearchUiState, viewModel: SearchViewModel) {
     val frontendSkills = remember { listOf("Html", "Css", "JavaScript", "React", "Vue", "Angular") }
-    val backendSkills = remember { listOf("Node.js", ".NET", "Python", "Go", "Java", "Spring Boot", "Laravel") }
+    val backendSkills =
+        remember { listOf("Node.js", ".NET", "Python", "Go", "Java", "Spring Boot", "Laravel") }
     val selectedSkills by viewModel.selectedSkills.collectAsState()
 
     Column(modifier = Modifier.fillMaxWidth()) {
@@ -102,21 +108,7 @@ fun SearchBar(uiState: SearchUiState, viewModel: SearchViewModel) {
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier.fillMaxWidth()
     ) {
-        Box(
-            modifier = Modifier.weight(1f)
-        ) {
-            BaseInputField(
-                onValueChange = {},
-                label = "Pesquise por competência",
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Filled.Search,
-                        contentDescription = "Icon button",
-                        tint = TextColorPrimary
-                    )
-                }
-            )
-        }
+        Text(text = "MENTORA", fontFamily = MontserratBold, fontSize = 20.sp, color = PrimaryColor)
 
         Spacer(modifier = Modifier.width(10.dp))
 
@@ -133,14 +125,21 @@ fun FilterButton(uiState: SearchUiState) {
             onToggleFilter.value(!uiState.showFilters)
         },
         shape = RoundedCornerShape(5.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-        modifier = Modifier.offset(y = 5.dp)
+        colors = ButtonDefaults.buttonColors(containerColor = if (uiState.showFilters) PrimaryColor else Color.Transparent),
     ) {
         Icon(
-            imageVector = Icons.Outlined.List,
+            painter = painterResource(id = R.drawable.baseline_filter_list_24),
             contentDescription = "Botão Filtros",
-            tint = TextColorPrimary,
+            tint = if (uiState.showFilters) TextContrast else TextColorPrimary,
         )
+        Spacer(modifier = Modifier.width(10.dp))
+        Text(
+            text = "Filtros",
+            fontFamily = MontserratSemiBold,
+            fontSize = 16.sp,
+            color = if (uiState.showFilters) TextContrast else TextColorPrimary
+        )
+
     }
 }
 
@@ -154,11 +153,19 @@ fun FilterSection(
     Column(modifier = Modifier.padding(top = 20.dp)) {
         Text(text = "Frontend", Modifier.fillMaxWidth())
         Spacer(modifier = Modifier.height(8.dp))
-        SkillChips(skills = frontendSkills, selectedSkills = selectedSkills, onClick = viewModel::onSelectSkill)
+        SkillChips(
+            skills = frontendSkills,
+            selectedSkills = selectedSkills,
+            onClick = viewModel::onSelectSkill
+        )
         Spacer(modifier = Modifier.height(20.dp))
         Text(text = "Backend", Modifier.fillMaxWidth())
         Spacer(modifier = Modifier.height(8.dp))
-        SkillChips(skills = backendSkills, selectedSkills = selectedSkills, onClick = viewModel::onSelectSkill)
+        SkillChips(
+            skills = backendSkills,
+            selectedSkills = selectedSkills,
+            onClick = viewModel::onSelectSkill
+        )
     }
 }
 
@@ -178,7 +185,6 @@ fun SkillChips(skills: List<String>, selectedSkills: List<String>, onClick: (Str
         }
     }
 }
-
 
 
 @Composable

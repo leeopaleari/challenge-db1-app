@@ -7,7 +7,6 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Box
@@ -38,17 +37,16 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import br.com.fiap.mentora.navigation.MentoraNavHost
-import br.com.fiap.mentora.navigation.MentoraTopLevelNavigation
-import br.com.fiap.mentora.navigation.TOP_LEVEL_DESTINATIONS
-import br.com.fiap.mentora.navigation.TopLevelDestination
+import br.com.fiap.mentora.core.navigation.MentoraNavHost
+import br.com.fiap.mentora.core.navigation.MentoraTopLevelNavigation
+import br.com.fiap.mentora.core.navigation.TOP_LEVEL_DESTINATIONS
+import br.com.fiap.mentora.core.navigation.TopLevelDestination
 import br.com.fiap.mentora.ui.theme.BackgroundDark
 import br.com.fiap.mentora.ui.theme.MentoraTheme
 import br.com.fiap.mentora.ui.theme.PrimaryColor
@@ -84,15 +82,12 @@ fun MentoraApp() {
                     ) == PackageManager.PERMISSION_GRANTED
                 )
             }
+
             val permissionLauncher =
                 rememberLauncherForActivityResult(
                     contract = ActivityResultContracts.RequestPermission(),
                     onResult = { isGranted ->
                         hasNotificationPermission = isGranted
-
-//                    if (!isGranted) {
-//                        shouldShowRequestPermissionRationale(permission.POST_NOTIFICATIONS)
-//                    }
                     }
                 )
 
