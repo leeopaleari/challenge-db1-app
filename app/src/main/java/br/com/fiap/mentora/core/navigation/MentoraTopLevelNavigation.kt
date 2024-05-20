@@ -55,12 +55,12 @@ val TOP_LEVEL_DESTINATIONS = listOf(
         unselectedIcon = Icons.Outlined.Search,
         iconText = "Busca"
     ),
-    TopLevelDestination(
-        route = FavoritesDestination.route,
-        selectedIcon = Icons.Filled.Favorite,
-        unselectedIcon = Icons.Outlined.FavoriteBorder,
-        iconText = "Favoritos"
-    ),
+//    TopLevelDestination(
+//        route = FavoritesDestination.route,
+//        selectedIcon = Icons.Filled.Favorite,
+//        unselectedIcon = Icons.Outlined.FavoriteBorder,
+//        iconText = "Favoritos"
+//    ),
     TopLevelDestination(
         route = ProfileDestination.route,
         selectedIcon = Icons.Filled.Person,
