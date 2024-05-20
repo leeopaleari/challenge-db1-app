@@ -9,6 +9,7 @@ import br.com.fiap.mentora.network.api.MentorService
 import br.com.fiap.mentora.network.api.StudentService
 import br.com.fiap.mentora.screens.app.home.state.HomeUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -79,9 +80,28 @@ class HomeViewModel @Inject constructor(
 
     }
 
-    fun onDislike() {
-//        _uiState.update { currentState ->
-//            currentState.copy(indexToRender = currentState.indexToRender - 1)
-//        }
+    fun onDislike(index: Int) {
+        _uiState.update { currentState ->
+            val nextIndex = if (index == currentState.users.size - 1) {
+                0
+            } else {
+                currentState.indexToRender + 1
+            }
+            currentState.copy(indexToRender = nextIndex)
+        }
+
+        viewModelScope.launch {
+            delay(150L)
+            _uiState.update { currentState ->
+                val updatedUsers = currentState.users.toMutableList().apply {
+                    removeAt(index)
+                }
+
+                currentState.copy(
+                    users = updatedUsers,
+                    indexToRender = currentState.indexToRender.coerceAtMost(updatedUsers.size - 1)
+                )
+            }
+        }
     }
 }

@@ -121,7 +121,9 @@ fun MatchCard(
         ) {
             Button(
                 modifier = Modifier.size(60.dp),
-                onClick = {},
+                onClick = {
+                    onDislike()
+                },
                 shape = CircleShape,
                 contentPadding = PaddingValues(0.dp),
                 colors = ButtonDefaults.buttonColors(

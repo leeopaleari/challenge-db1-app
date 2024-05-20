@@ -98,7 +98,7 @@ fun Content(uiState: HomeUiState, viewModel: HomeViewModel) {
                         Log.i("HOME", uiState.indexToRender.toString())
                     },
                     onDislike = {
-
+                        viewModel.onDislike(index)
                     }
                 )
             }
